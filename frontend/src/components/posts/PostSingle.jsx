@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export const PostSingle = ({post}) => {
+export const PostSingle = ({post, onDelete}) => {
   useEffect(() => {
     console.log(post)
   }, []);
@@ -9,7 +9,7 @@ export const PostSingle = ({post}) => {
             <th scope="row">{post.name}</th>
             <td>{post.description}</td>
             <td className="td-action">
-                <button className="btn btn-danger">Eliminar</button>
+                <button className="btn btn-danger" onClick={()=>onDelete(post.id)}>Eliminar</button>
             </td>
         </tr>
     );

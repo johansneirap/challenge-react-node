@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
 
 /* MIDDLEWARES */
 app.use(express.json());
+app.use(cors());
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
@@ -24,7 +25,7 @@ app.use((req, res, next) => {
     );
     next();
 });
-app.use(cors());
+
 
 /* ROUTER */
 app.use("/api", require("./routes/post_routes"));

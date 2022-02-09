@@ -17,17 +17,24 @@ function App() {
   }
 
   const onSubmit = async(e)=>{
-    console.log("entrando aqui")
     e.preventDefault();
     if (post.name && post.description){
-      const response = await axios.post('http://localhost:3001/api/posts',{
-        name: post.name,
-        description: post.description
-      })
+      const response = await axios.post('http://localhost:3001/api/posts',post)
       if (response.data.message === "Post created succesfully"){
-        alert(response.data.message)
+        fetchPosts();
+        alert(response.data.message);
+        setPost({name:"", description:""})
       }
     }
+  }
+
+  const onDelete = async(id)=>{
+    const { data } = await axios.delete(`http://localhost:3001/api/posts/${id}`)
+    const {message, body:{post}} = data;
+      if (message === "Post deleted succesfully"){
+        fetchPosts();
+        alert(`${message}: ${post.name}`);
+      }
   }
 
   useEffect(() => {
@@ -39,7 +46,7 @@ function App() {
       <div className="row">
       <h1 className=" mb-10">Postify</h1>
       <SearchBar/>
-      <PostList posts={posts}/>
+      <PostList posts={posts} onDelete={onDelete}/>
       <PostForm post={post} setPost={setPost} onSubmit={onSubmit}/>
       </div>
     </div>
