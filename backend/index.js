@@ -5,11 +5,16 @@ app.get('/', (req, res) => {
     res.send('Hello world')
 });
 
-app.get('/api/posts', (req, res) => {
-    res.send(['aqui van los posts'])
-});
+// app.get('/api/posts', (req, res) => {
+//     res.send(['aqui van los posts'])
+// });
 
+/* MIDDLEWARES */
+app.use(express.json());
 
-const PORT = 3001
-app.listen(PORT)
-console.log(`Server runnning on port ${PORT}`)
+/* ROUTER */
+app.use("/api", require("./routes/post_routes"));
+
+const PORT = 3001;
+app.listen(PORT);
+console.log(`Server runnning on port ${PORT}`);
