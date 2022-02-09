@@ -1,43 +1,47 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import './App.css';
+import { PostForm } from './components/posts/PostForm';
+import { PostList } from './components/posts/PostList';
+import { SearchBar } from './components/posts/SearchBar';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [posts, setPosts] = useState([]);
+  const [post, setPost] = useState({name:"", description:""});
+
+  const fetchPosts = async()=>{
+    const response = await axios.get('http://localhost:3001/api/posts');
+    setPosts(response.data);
+  }
+
+  const onSubmit = async(e)=>{
+    console.log("entrando aqui")
+    e.preventDefault();
+    if (post.name && post.description){
+      const response = await axios.post('http://localhost:3001/api/posts',{
+        name: post.name,
+        description: post.description
+      })
+      if (response.data.message === "Post created succesfully"){
+        alert(response.data.message)
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <div className="App container">
+      <div className="row">
+      <h1 className=" mb-10">Postify</h1>
+      <SearchBar/>
+      <PostList posts={posts}/>
+      <PostForm post={post} setPost={setPost} onSubmit={onSubmit}/>
+      </div>
     </div>
   )
 }
