@@ -1,14 +1,34 @@
 import { createPost, deletePost, getAllPosts } from "../services/posts";
 
-export const postReducer = (state = [], action) => {
+export const postReducer = (state = {posts:[],filteredPosts:[]}, action) => {
 	if (action.type === "@posts/init") {
-		return [...action.payload];
+		return {...state,posts:[...action.payload],filteredPosts:[...action.payload]};
 	}
 	if (action.type === "@posts/created") {
-		return [...state, action.payload];
+		return {
+            ...state,
+            posts:[...state.posts, action.payload],
+            filteredPosts:[...state.posts, action.payload]
+        };
 	}
 	if (action.type === "@posts/deleted") {
-		return [...state.filter((post) => post.id !== action.payload.id)];
+		return {
+            ...state,
+            posts:[...state.posts.filter((post) => post.id !== action.payload.id)],
+            filteredPosts:[...state.posts.filter((post) => post.id !== action.payload.id)]
+        };
+	}
+	if (action.type === "@posts/search") {
+        if (action.payload) {
+            return {
+                ...state,
+                filteredPosts:[...state.posts.filter((post) => post.name.toLowerCase().includes(action.payload.toLowerCase()))]
+            };
+        }
+        return {
+            ...state,
+            filteredPosts: [...state.posts]
+        }
 	}
 	return state;
 };
@@ -41,4 +61,11 @@ export const initPosts = () => {
 			payload: posts,
 		});
 	};
+};
+
+export const filterPostAction = (textToSearch)=>{
+    return {
+        type: "@posts/search",
+        payload: textToSearch,
+    }
 };

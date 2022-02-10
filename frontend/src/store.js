@@ -3,9 +3,9 @@ import { filterReducer } from "./reducers/filterReducer";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
-const reducer = combineReducers({
-	posts: postReducer,
-	filter: filterReducer,
-});
+// const reducer = combineReducers({
+// 	posts: postReducer,
+// 	filter: filterReducer,
+// });
 
-export const store = createStore(reducer, applyMiddleware(thunk));
+export const store = createStore(postReducer, applyMiddleware(thunk));

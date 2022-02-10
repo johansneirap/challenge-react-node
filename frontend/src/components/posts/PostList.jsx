@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 import { PostSingle } from "./PostSingle";
 
 export const PostList = () => {
-	const posts = useSelector((state) => state.posts);
+	const posts = useSelector((state) => state.filteredPosts);
 
 	return (
-		<div className="row">
+		<div className="row justify-content-md-center mt-3">
+			<div className="col-lg-8">
 			<table className="table table-striped">
 				<thead>
 					<tr>
@@ -23,6 +24,7 @@ export const PostList = () => {
 					))}
 				</tbody>
 			</table>
+			</div>
 		</div>
 	);
 };

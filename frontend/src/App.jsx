@@ -14,9 +14,9 @@ const App = () => {
 	}, [dispatch]);
 
 	return (
-		<div className="App container">
-			<div className="row">
-				<h1 className="my-3">Postify</h1>
+		<div className="App container mt-5">
+			<div className="row justify-content-md-center">
+				<h1 className="my-5 text-center">Challenge React Node Posts</h1>
 				<SearchBar />
 				<PostList />
 				<PostForm />

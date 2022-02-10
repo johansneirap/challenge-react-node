@@ -14,24 +14,12 @@ export const PostForm = () => {
 	};
 
 	return (
-		<form className="row g-3" onSubmit={(e) => addPost(e)}>
-			<div className="col-auto">
-				<input 
-         type="text" 
-         className="form-control" 
-         placeholder="Nombre" 
-         value={post.name} 
-         onChange={(e) => setPost({ ...post, name: e.target.value })} 
-         />
+		<form className="row g-3  justify-content-md-center" onSubmit={(e) => addPost(e)}>
+			<div className="col-2">
+				<input type="text" className="form-control" placeholder="Nombre" value={post.name} onChange={(e) => setPost({ ...post, name: e.target.value })} />
 			</div>
-			<div className="col-auto">
-				<input 
-         type="text" 
-         className="form-control" 
-         placeholder="Descripcion" 
-         value={post.description} 
-         onChange={(e) => setPost({ ...post, description: e.target.value })} 
-         />
+			<div className="col-5">
+				<input type="text" className="form-control" placeholder="Descripcion" value={post.description} onChange={(e) => setPost({ ...post, description: e.target.value })} />
 			</div>
 			<div className="col-auto">
 				<button type="submit" className="btn btn-primary mb-3">
