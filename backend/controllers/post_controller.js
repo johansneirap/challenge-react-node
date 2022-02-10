@@ -35,7 +35,7 @@ const deletePost = async(req, res) => {
         }
         return res.send({
             message: 'Post deleted succesfully',
-            body: { post: postDeleted.rows[0] }
+            post: postDeleted.rows[0],
         })
     } catch (error) {
         console.log(error);
