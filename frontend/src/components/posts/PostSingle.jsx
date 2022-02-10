@@ -13,7 +13,7 @@ export const PostSingle = ({ post }) => {
 		<tr>
 			<th scope="row">{post.name}</th>
 			<td>{post.description}</td>
-			<td className="td-action">
+			<td className="text-center">
 				<button className="btn btn-danger" onClick={() => deletePost(post.id)}>
 					Eliminar
 				</button>

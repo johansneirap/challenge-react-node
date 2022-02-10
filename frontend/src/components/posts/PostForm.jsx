@@ -14,7 +14,7 @@ export const PostForm = () => {
 	};
 
 	return (
-		<form className="row g-3  justify-content-md-center" onSubmit={(e) => addPost(e)}>
+		<form className="row g-3  justify-content-md-center mb-5" onSubmit={(e) => addPost(e)}>
 			<div className="col-2">
 				<input type="text" className="form-control" placeholder="Nombre" value={post.name} onChange={(e) => setPost({ ...post, name: e.target.value })} />
 			</div>

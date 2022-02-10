@@ -1,36 +1,35 @@
 import { createPost, deletePost, getAllPosts } from "../services/posts";
 
-export const postReducer = (state = {posts:[],filteredPosts:[]}, action) => {
-	if (action.type === "@posts/init") {
-		return {...state,posts:[...action.payload],filteredPosts:[...action.payload]};
+export const postReducer = (state = { posts: [], filteredPosts: [] }, action) => {
+	switch (action.type) {
+		case "@posts/init":
+			return { ...state, posts: [...action.payload], filteredPosts: [...action.payload] };
+		case "@posts/created":
+			return {
+				...state,
+				posts: [...state.posts, action.payload],
+				filteredPosts: [...state.posts, action.payload],
+			};
+		case "@posts/deleted":
+			return {
+				...state,
+				posts: [...state.posts.filter((post) => post.id !== action.payload.id)],
+				filteredPosts: [...state.posts.filter((post) => post.id !== action.payload.id)],
+			};
+		case "@posts/search":
+			if (action.payload) {
+				return {
+					...state,
+					filteredPosts: [...state.posts.filter((post) => post.name.toLowerCase().includes(action.payload.toLowerCase()))],
+				};
+			}
+			return {
+				...state,
+				filteredPosts: [...state.posts],
+			};
+		default:
+			return state;
 	}
-	if (action.type === "@posts/created") {
-		return {
-            ...state,
-            posts:[...state.posts, action.payload],
-            filteredPosts:[...state.posts, action.payload]
-        };
-	}
-	if (action.type === "@posts/deleted") {
-		return {
-            ...state,
-            posts:[...state.posts.filter((post) => post.id !== action.payload.id)],
-            filteredPosts:[...state.posts.filter((post) => post.id !== action.payload.id)]
-        };
-	}
-	if (action.type === "@posts/search") {
-        if (action.payload) {
-            return {
-                ...state,
-                filteredPosts:[...state.posts.filter((post) => post.name.toLowerCase().includes(action.payload.toLowerCase()))]
-            };
-        }
-        return {
-            ...state,
-            filteredPosts: [...state.posts]
-        }
-	}
-	return state;
 };
 
 export const createPostAction = (post) => {
@@ -63,9 +62,9 @@ export const initPosts = () => {
 	};
 };
 
-export const filterPostAction = (textToSearch)=>{
-    return {
-        type: "@posts/search",
-        payload: textToSearch,
-    }
+export const filterPostAction = (textToSearch) => {
+	return {
+		type: "@posts/search",
+		payload: textToSearch,
+	};
 };

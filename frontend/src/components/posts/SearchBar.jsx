@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import {useDispatch} from 'react-redux'
-import { filterPostAction, initPosts } from '../../reducers/postReducer';
+import { useDispatch } from 'react-redux';
+import { filterPostAction } from '../../reducers/postReducer';
 
 export const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
   const dispatch = useDispatch();
 
-  const onFilter = (textToSearch)=>{
+  const onFilter = (textToSearch) => {
     setSearchText(textToSearch);
-    dispatch(filterPostAction(textToSearch))
+    dispatch(filterPostAction(textToSearch));
   }
   return (
     <div className="col-8 text-center">

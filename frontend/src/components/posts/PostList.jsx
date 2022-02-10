@@ -8,22 +8,22 @@ export const PostList = () => {
 	return (
 		<div className="row justify-content-md-center mt-3">
 			<div className="col-lg-8">
-			<table className="table table-striped">
-				<thead>
-					<tr>
-						<th scope="col">Nombre</th>
-						<th scope="col">Descripción</th>
-						<th className="td-action" scope="col">
-							Acción
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					{posts.map((post) => (
-						<PostSingle key={post.id} post={post} />
-					))}
-				</tbody>
-			</table>
+				<table className="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Nombre</th>
+							<th scope="col">Descripción</th>
+							<th className="text-center" scope="col">
+								Acción
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						{posts.map((post) => (
+							<PostSingle key={post.id} post={post} />
+						))}
+					</tbody>
+				</table>
 			</div>
 		</div>
 	);

@@ -4,7 +4,6 @@ import { PostForm } from "./components/posts/PostForm";
 import { PostList } from "./components/posts/PostList";
 import { SearchBar } from "./components/posts/SearchBar";
 import { initPosts } from "./reducers/postReducer";
-import "./App.css";
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -14,13 +13,15 @@ const App = () => {
 	}, [dispatch]);
 
 	return (
-		<div className="App container mt-5">
+		<div className="bg-light rounded">
+		<div className="App container mt-5 bg-white rounded">
 			<div className="row justify-content-md-center">
 				<h1 className="my-5 text-center">Challenge React Node Posts</h1>
 				<SearchBar />
 				<PostList />
 				<PostForm />
 			</div>
+		</div>
 		</div>
 	);
 };
