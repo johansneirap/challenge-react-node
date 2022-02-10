@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 const pool = new Pool({
     host: 'localhost',
     user: 'postgres',
-    password: 'Joh4n$en!',
+    password: 'postgres',
     database: 'posts',
     port: '5432'
 })
@@ -11,9 +11,10 @@ const createPost = async(req, res) => {
     try {
         const { name, description } = req.body;
         await pool.query('INSERT INTO POST (name, description) VALUES($1, $2)', [name, description])
+        const postCreated = await pool.query('SELECT * FROM post ORDER BY id DESC LIMIT 1')
         return res.send({
             message: 'Post created succesfully',
-            body: { name, description }
+            post: postCreated.rows[0]
         })
     } catch (error) {
         console.log(error);
